@@ -1,6 +1,3 @@
 # Croptott Bányász Birodalom
 
-A webes, folyamatosan futó bányászati játék projektje.
-
-## Cél
-Publikus játékoldal, játékos bejelentkezés, bányászat, ércpiac, gépek, pénzügyek, küldetések és admin felület.
+A játék webes, mobil- és PC-barát változata. A GitHub Pages kiadás a `public/` mappából készül.
