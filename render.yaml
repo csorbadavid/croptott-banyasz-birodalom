@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: croptott-banyasz-birodalom
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/session
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: croptott-db
+          property: connectionString
+
+databases:
+  - name: croptott-db
+    plan: free
