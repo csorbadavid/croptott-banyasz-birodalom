@@ -1,0 +1,1 @@
+GPU Market Tycoon login reference: the production login must visually match the supplied NVIDIA/AMD neon reference image. This file is only a design note.
