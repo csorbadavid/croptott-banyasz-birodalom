@@ -1,1 +1,1 @@
-{"rewrites":[{"source":"/","destination":"/pwa.html"},{"source":"/game","destination":"/pwa.html"},{"source":"/game/","destination":"/pwa.html"}]}
+{"rewrites":[{"source":"/","destination":"/icons.html"},{"source":"/game","destination":"/icons.html"},{"source":"/game/","destination":"/icons.html"}]}
