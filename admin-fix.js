@@ -58,7 +58,7 @@
     originalPage=window.page;
     window.page=function(id){
       if((id==='admin'||id==='systemsAdmin') && !allowed){
-        try{ if(typeof toast==='function') toast('⛔ Ez az admin felület csak a tulajdonosnak érhető el.'); }catch(e){}
+        try{ if(typeof toast==='function') toast('⛔ Ez az admin felület csak a jogosult adminnak érhető el.'); }catch(e){}
         return;
       }
       return originalPage.apply(this,arguments);
@@ -67,8 +67,11 @@
 
   function openAdmin(){
     if(!allowed) return;
+    if(typeof window.sysShow==='function' && document.getElementById('systemsAdmin')){
+      window.sysShow('systemsAdmin');
+      return;
+    }
     if(typeof window.page==='function') window.page('admin');
-    else if(typeof window.sysShow==='function') window.sysShow('systemsAdmin');
   }
 
   function addOwnerAdminCard(){
