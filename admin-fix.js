@@ -1,7 +1,8 @@
 (function(){
   'use strict';
-  const OWNER='10ec718e-2863-46be-8706-ab040e4d6f3c';
-  const EXTRA_ADMIN='9298c6bc-c609-4712-907a-b8bf777411b2';
+  // Only this account is allowed to use the admin UI.
+  const OWNER='9298c6bc-c609-4712-907a-b8bf777411b2';
+  const EXTRA_ADMIN='';
   let allowed=false;
   let originalPage=null;
   let authBound=false;
@@ -22,16 +23,10 @@
         const r=await client.auth.getUser();
         uid=String(r?.data?.user?.id||uid||'');
       }
-      allowed=(uid===OWNER || uid===EXTRA_ADMIN);
-      if(!allowed && client?.rpc){
-        try{
-          const r=await client.rpc('admin_dashboard');
-          if(!r?.error) allowed=true;
-        }catch(e){}
-      }
+      allowed=(uid===OWNER || (EXTRA_ADMIN && uid===EXTRA_ADMIN));
     }catch(e){
       const uid=getUid();
-      allowed=(uid===OWNER || uid===EXTRA_ADMIN);
+      allowed=(uid===OWNER || (EXTRA_ADMIN && uid===EXTRA_ADMIN));
     }
     apply();
     addOwnerAdminCard();
@@ -58,7 +53,7 @@
     originalPage=window.page;
     window.page=function(id){
       if((id==='admin'||id==='systemsAdmin') && !allowed){
-        try{ if(typeof toast==='function') toast('⛔ Ez az admin felület csak a jogosult adminnak érhető el.'); }catch(e){}
+        try{ if(typeof toast==='function') toast('⛔ Ez az admin felület csak Csorba Dávid_1 számára érhető el.'); }catch(e){}
         return;
       }
       return originalPage.apply(this,arguments);
@@ -83,7 +78,7 @@
     card.setAttribute('data-owner-admin','1');
     card.className='card row';
     card.style.cssText='display:flex!important;align-items:center;gap:10px;margin:10px 0;border:1px solid #d6a72c;box-shadow:0 0 12px rgba(214,167,44,.22);';
-    card.innerHTML='<main><b>👑 ADMIN FELÜLET</b><small>Csorba Dávid_1 • szerverkezelés</small></main><button class="btn primary" type="button">MEGNYITÁS</button>';
+    card.innerHTML='<main><b>👑 ADMIN FELÜLET</b><small>Csorba Dávid_1 • csak neked</small></main><button class="btn primary" type="button">MEGNYITÁS</button>';
     card.querySelector('button').onclick=openAdmin;
     const list=extras.querySelector('.list');
     (list||extras).prepend(card);
@@ -114,7 +109,6 @@
   function tick(){
     bindAuth();
     installPageGuard();
-    if(getUid()===OWNER || getUid()===EXTRA_ADMIN) allowed=true;
     apply();
     addOwnerAdminCard();
     addOwnerAdminButton();
