@@ -1,0 +1,1 @@
+{"rewrites":[{"source":"/","destination":"/api/index"},{"source":"/manifest.webmanifest","destination":"https://raw.githubusercontent.com/csorbadavid/croptott-banyasz-birodalom/main/manifest.webmanifest?v=743c9f32e8eb5117066a3d8a45519ec3ab63b6aa"}]}
