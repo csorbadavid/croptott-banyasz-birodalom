@@ -1,1 +1,1 @@
-{"rewrites":[{"source":"/game","destination":"/"},{"source":"/game/","destination":"/"}]}
+{"rewrites":[{"source":"/","destination":"/pwa.html"},{"source":"/game","destination":"/pwa.html"},{"source":"/game/","destination":"/pwa.html"}]}
