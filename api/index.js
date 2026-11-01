@@ -1,27 +1,25 @@
-const { put, list, get } = require('@vercel/blob');
-const crypto=require('crypto');
-const COOKIE='gpu_session';const DB='gpu-market-tycoon/state.json';
-const GPUs=[['RTX 5090','NVIDIA',1650000],['RTX 5080','NVIDIA',1050000],['RTX 5070 Ti','NVIDIA',720000],['RTX 5070','NVIDIA',590000],['RTX 5060 Ti','NVIDIA',410000],['RTX 4090','NVIDIA',1250000],['RTX 4080 SUPER','NVIDIA',780000],['RTX 4070 Ti SUPER','NVIDIA',520000],['RX 9070 XT','AMD',680000],['RX 9070','AMD',560000],['RX 9060 XT','AMD',390000],['RX 7900 XTX','AMD',620000],['RX 7800 XT','AMD',420000],['RX 7600','AMD',220000]].map(([name,vendor,base],id)=>({id,name,vendor,base}));
-const now=()=>Date.now(),id=()=>crypto.randomBytes(16).toString('hex');
-const hash=(p,s=crypto.randomBytes(16))=>({salt:s.toString('hex'),hash:crypto.scryptSync(p,s,32).toString('hex')});
-const valid=(p,x)=>x&&crypto.scryptSync(p,Buffer.from(x.salt,'hex'),32).toString('hex')===x.hash;
-const fresh=()=>({users:[],sessions:[],rooms:{},prices:GPUs.map(g=>g.base),history:GPUs.map(g=>[g.base]),tx:[],lastTick:now()});
-async function load(){try{const a=await list({prefix:DB,limit:1});if(!a.blobs?.length)return fresh();const b=await get(DB,{access:'private'});return JSON.parse(await new Response(b.stream).text())}catch(e){console.error('LOAD',e.message);return fresh()}}
-async function save(s){await put(DB,JSON.stringify(s),{access:'private',addRandomSuffix:false,allowOverwrite:true});return s}
-function tick(s){const n=Math.min(120,Math.floor((now()-s.lastTick)/5000));for(let t=0;t<n;t++){s.prices=s.prices.map((p,i)=>Math.max(GPUs[i].base*.45,Math.min(GPUs[i].base*2.5,p*(1+(Math.random()-.49)*.018+Math.sin((s.lastTick/5000+t+i)/17)*.0015))));s.history=s.history.map((h,i)=>h.concat(s.prices[i]).slice(-120));}if(n)s.lastTick+=n*5000}
-function cookie(req){const x=(req.headers.cookie||'').split(';').map(v=>v.trim()).find(v=>v.startsWith(COOKIE+'='));return x?decodeURIComponent(x.slice(COOKIE.length+1)):null}
-function user(s,req){const tok=cookie(req),ss=s.sessions.find(x=>x.token===tok);return ss?s.users.find(x=>x.id===ss.uid):null}
-function out(res,status,x){res.statusCode=status;res.setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('Cache-Control','no-store');res.end(JSON.stringify(x))}
-function setCookie(res,t,max=2592000){res.setHeader('Set-Cookie',`${COOKIE}=${encodeURIComponent(t)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${max}`)}
-async function body(req){if(req.body&&typeof req.body==='object')return req.body;let s='';for await(const c of req)s+=c;try{return JSON.parse(s||'{}')}catch{return {}}}
-function snap(s,u){const hold=u.hold||{};let gv=0,gc=0;GPUs.forEach((g,i)=>{const q=+hold[i]||0;gv+=q*s.prices[i];gc+=q});const leaderboard=s.users.map(x=>{const h=x.hold||{};let v=x.cash;let q=0;GPUs.forEach((g,i)=>{q+=+h[i]||0;v+=(+h[i]||0)*s.prices[i]});return {name:x.name,level:x.level,equity:v,gpus:q}}).sort((a,b)=>b.equity-a.equity).slice(0,20);const room=u.room?s.rooms[u.room]:null;return {user:{id:u.id,name:u.name,email:u.email,level:u.level,xp:u.xp,cash:u.cash,hold,gpuValue:gv,equity:u.cash+gv,totalGpus:gc,room:u.room||null},gpus:GPUs,prices:s.prices,history:s.history,tx:s.tx.filter(x=>x.uid===u.id).slice(-50).reverse(),room:room?{code:u.room,members:room.members.map(uid=>{const x=s.users.find(z=>z.id===uid);return x?{name:x.name,level:x.level,cash:x.cash}:null}).filter(Boolean)}:null,leaderboard,serverTime:now()}}
-module.exports=async(req,res)=>{try{const s=await load();tick(s);const q=new URL(req.url,'http://x');if(req.method==='GET'&&q.searchParams.get('state')==='1'){const u=user(s,req);return u?out(res,200,snap(s,u)):out(res,401,{error:'Nincs bejelentkezve.'})}if(req.method!=='POST')return out(res,405,{error:'Method not allowed'});const b=await body(req),a=String(b.action||'');
-if(a==='register'){const email=String(b.email||'').trim().toLowerCase(),name=String(b.name||'').trim().slice(0,24),p=String(b.password||'');if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||!name||p.length<6)return out(res,400,{error:'Adj meg érvényes e-mailt, játékosnevet és legalább 6 karakteres jelszót.'});if(s.users.some(x=>x.email===email))return out(res,409,{error:'Ez az e-mail már regisztrálva van.'});const u={id:id(),email,name,pw:hash(p),level:1,xp:0,cash:0,hold:{},room:null,createdAt:now()};s.users.push(u);const tok=id();s.sessions=s.sessions.filter(x=>x.uid!==u.id);s.sessions.push({uid:u.id,token:tok});setCookie(res,tok);await save(s);return out(res,200,{ok:true,state:snap(s,u)})}
-if(a==='login'){const email=String(b.email||'').trim().toLowerCase(),p=String(b.password||''),u=s.users.find(x=>x.email===email);if(!u||!valid(p,u.pw))return out(res,401,{error:'Hibás e-mail cím vagy jelszó.'});const tok=id();s.sessions=s.sessions.filter(x=>x.uid!==u.id);s.sessions.push({uid:u.id,token:tok});setCookie(res,tok);await save(s);return out(res,200,{ok:true,state:snap(s,u)})}
-const u=user(s,req);if(a==='logout'){s.sessions=s.sessions.filter(x=>x.token!==cookie(req));setCookie(res,'',0);await save(s);return out(res,200,{ok:true})}if(!u)return out(res,401,{error:'Nincs bejelentkezve.'});
-if(a==='claim_income'){if(now()-(u.lastIncome||0)<60000)return out(res,429,{error:'A piaci munka percenként egyszer vehető fel.'});u.cash+=25000;u.lastIncome=now();u.xp+=5;u.level=1+Math.floor(u.xp/100);await save(s);return out(res,200,{ok:true,state:snap(s,u)})}
-if(a==='trade'){const i=+b.gpu,n=+b.qty,side=b.side;if(!Number.isInteger(i)||i<0||i>=GPUs.length||!Number.isInteger(n)||n<1||n>100||!['buy','sell'].includes(side))return out(res,400,{error:'Érvénytelen kereskedés.'});const p=s.prices[i],exec=p*(side==='buy'?1+n*.00015:1-n*.00015),fee=exec*n*.005;u.hold=u.hold||{};const owned=+u.hold[i]||0;if(side==='buy'){const cost=exec*n+fee;if(u.cash<cost)return out(res,400,{error:'Nincs elég pénzed.'});u.cash-=cost;u.hold[i]=owned+n}else{if(owned<n)return out(res,400,{error:'Nincs ennyi kártyád.'});u.cash+=exec*n-fee;u.hold[i]=owned-n;if(!u.hold[i])delete u.hold[i]}u.xp+=n*10;u.level=1+Math.floor(u.xp/100);s.tx.push({uid:u.id,gpu:i,side,qty:n,price:exec,fee,at:now()});s.tx=s.tx.slice(-2000);s.prices[i]=Math.max(GPUs[i].base*.45,Math.min(GPUs[i].base*2.5,s.prices[i]*(side==='buy'?1.0012:.9988)));await save(s);return out(res,200,{ok:true,state:snap(s,u)})}
-if(a==='create_room'){if(u.room)return out(res,400,{error:'Már van szobád.'});let c;do{c=crypto.randomBytes(4).toString('hex').slice(0,6).toUpperCase()}while(s.rooms[c]);s.rooms[c]={members:[u.id],createdAt:now()};u.room=c;await save(s);return out(res,200,{ok:true,state:snap(s,u)})}
-if(a==='join_room'){const c=String(b.code||'').toUpperCase();if(!/^[A-Z0-9]{6}$/.test(c)||!s.rooms[c])return out(res,404,{error:'Ilyen szoba nem létezik.'});if(u.room&&s.rooms[u.room])s.rooms[u.room].members=s.rooms[u.room].members.filter(x=>x!==u.id);if(!s.rooms[c].members.includes(u.id))s.rooms[c].members.push(u.id);u.room=c;await save(s);return out(res,200,{ok:true,state:snap(s,u)})}
-if(a==='leave_room'){if(u.room&&s.rooms[u.room]){s.rooms[u.room].members=s.rooms[u.room].members.filter(x=>x!==u.id);if(!s.rooms[u.room].members.length)delete s.rooms[u.room]}u.room=null;await save(s);return out(res,200,{ok:true,state:snap(s,u)})}
-return out(res,400,{error:'Ismeretlen művelet.'})}catch(e){console.error(e);return out(res,500,{error:'Szerverhiba. Próbáld újra.'})}};
+const BASE='https://raw.githubusercontent.com/csorbadavid/croptott-banyasz-birodalom/main/';
+const VERSION='fix-20261101-01';
+
+export default async function handler(req,res){
+  try{
+    const get=async(path)=>{const r=await fetch(`${BASE}${path}?v=${VERSION}&t=${Date.now()}`,{cache:'no-store'});if(!r.ok)throw new Error(`${path} ${r.status}`);return r.text()};
+    let html=await get('index.html');
+    const css=await get('redesign.css');
+    const design=await get('redesign.js');
+    const fix=`<script data-croptott-fix>(function(){
+function adminVisible(){try{var n=document.getElementById('userName');if(n&&n.textContent.trim()==='Csorba'){var a=document.getElementById('adminMenu');if(a)a.classList.remove('hidden')}}catch(e){}}
+async function safeRefresh(){try{S=await rpc('mining_bootstrap');try{SOCIAL=await rpc('croptott_social_bootstrap')}catch(e){}renderAll();adminVisible()}catch(e){showErr(e)}}
+window.refresh=safeRefresh;
+window.buyPick=async function(i){try{var r=await rpc('mining_buy_pick',{p_pick:i});await safeRefresh();toast((r&&r.name?r.name:'Felszerelés')+' felszerelve!')}catch(e){showErr(e)}};
+window.upgrade=async function(k){try{var r=await rpc('mining_upgrade',{p_kind:k});await safeRefresh();toast('Fejlesztés megvásárolva • LV '+(r&&r.level||''))}catch(e){showErr(e)}};
+var t=setInterval(function(){if(document.getElementById('app')){clearInterval(t);adminVisible()}},300);
+})();</script>`;
+    const last=html.lastIndexOf('</body>');
+    const inject=`<style data-croptott-modern>${css}</style><script data-croptott-modern>${design.replace(/<\\/script/gi,'<\\/script')}</script>${fix}`;
+    html=last>=0?html.slice(0,last)+inject+html.slice(last):html+inject;
+    res.setHeader('Cache-Control','no-store,no-cache,must-revalidate');
+    res.setHeader('Content-Type','text/html; charset=utf-8');
+    res.status(200).send(html);
+  }catch(e){res.status(500).send('Croptott error: '+(e.message||e));}
+}
