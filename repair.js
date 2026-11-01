@@ -1,80 +1,81 @@
 (function(){
 const ADMIN_ID='79eb397b-c141-4c11-b381-d3cce655eed0';
-const rows=`Mészkőbánya|limestone|Mészkő|🪨|10
-Gránitbánya|granite|Gránit|🪨|15
-Bazaltbánya|basalt|Bazalt|⬛|20
-Homokkőbánya|sandstone|Homokkő|🟫|25
-Palabánya|slate|Pala|◼️|30
-Lignitbánya|lignite|Lignit|🟤|35
-Feketekőszén-bánya|hardcoal|Feketekőszén|⚫|40
-Antracitbánya|anthracite|Antracit|⬛|45
-Rézércbánya|copper|Rézérc|🟧|55
-Vasércbánya|iron|Vasérc|🔩|65
-Bauxitbánya|bauxite|Bauxit|🟥|75
-Mangánércbánya|manganese|Mangánérc|🟪|85
-Cinkércbánya|zinc|Cinkérc|⬜|95
-Ólomércbánya|lead|Ólomérc|◾|105
-Nikkelércbánya|nickel|Nikkelérc|🟩|115
-Krómitbánya|chromite|Krómit|🟫|125
-Kassziteritbánya|cassiterite|Kassziterit|🟨|135
-Wolframitbánya|wolframite|Wolframit|⬛|145
-Molibdenitbánya|molybdenite|Molibdenit|🩶|155
-Kobaltbánya|cobalt|Kobaltkő|🔵|165
-Grafitbánya|graphite|Grafit|⚫|175
-Lítiumércbánya|lithium|Lítiumérc|🩵|185
-Fluoritbánya|fluorite|Fluorit|🟣|195
-Baritbánya|barite|Barit|⚪|205
-Gipszbánya|gypsum|Gipsz|⬜|215
-Kősóbánya|halite|Kősó|🧂|225
-Kénbánya|sulfur|Kén|🟡|235
-Piritbánya|pyrite|Pirit|🟨|245
-Ezüstércbánya|silver|Ezüstérc|⚪|260
-Aranyércbánya|gold|Aranyérc|🟨|280
-Platinaércbánya|platinum|Platinaérc|⬜|300
-Palládiumércbánya|palladium|Palládiumérc|◻️|320
-Ródiumércbánya|rhodium|Ródiumérc|🔘|340
-Irídiumércbánya|iridium|Irídiumérc|🟣|360
-Ozmiumércbánya|osmium|Ozmiumérc|⚫|380
-Rutilbánya|rutile|Rutil|🔴|400
-Ilmenitbánya|ilmenite|Ilmenit|🖤|420
-Cirkonbánya|zircon|Cirkon|🔷|440
-Monacitbánya|monazite|Monacit|🟠|460
-Bastnäsitbánya|bastnasite|Bastnäsit|🟡|480
-Smaragdbánya|emerald|Smaragd|💚|520
-Rubinbánya|ruby|Rubin|❤️|550
-Zafírbánya|sapphire|Zafír|💙|580
-Turmalinbánya|tourmaline|Turmalin|🩷|610
-Ametisztbánya|amethyst|Ametiszt|💜|640
-Topázbánya|topaz|Topáz|🟠|670
-Opálbánya|opal|Opál|🤍|700
-Gyémántbánya|diamond|Gyémánt|💎|750
-Kvarckristály-bánya|quartz|Kvarckristály|🔷|800
-Obszidiánbánya|obsidian|Obszidián|⬛|850
-Titánércbánya|titanium|Titánérc|⚙️|900
-Vanádiumércbánya|vanadium|Vanádiumérc|🟦|950
-Tantálércbánya|tantalum|Tantálérc|⬜|1000
-Nióbiumércbánya|niobium|Nióbiumérc|🔹|1050
-Uránércbánya|uranium|Uránérc|☢️|1100
-Tóriumércbánya|thorium|Tóriumérc|🟢|1150
-Berkéliumbánya|berkelium|Berkélium|🟣|1200
-Kalifornium-bánya|californium|Kalifornium|🟠|1250
-Tellúrércbánya|tellurium|Tellúrérc|🟡|1300
-Germániumércbánya|germanium|Germániumérc|🩶|1350
-Bizmutércbánya|bismuth|Bizmutérc|🌈|1400
-Galliumércbánya|gallium|Galliumérc|🔵|1450
-Szelénércbánya|selenium|Szelénérc|🔴|1500
-Indiumércbánya|indium|Indiumérc|⚪|1550
-Hafniumércbánya|hafnium|Hafniumérc|⬜|1600
-Réniumbánya|rhenium|Réniumérc|🔘|1650
-Skandiumércbánya|scandium|Skandiumérc|🟦|1700
-Stronciumércbánya|strontium|Stronciumérc|🟩|1750
-Bórásvány-bánya|boron|Bórásvány|🟤|1800
-Berilliumércbánya|beryllium|Berilliumérc|🟢|1900`.split('\n').map(x=>x.split('|'));
+const rows=`Mészkőbánya|limestone|Mészkő|#b9b3a8|10
+Gránitbánya|granite|Gránit|#77746e|15
+Bazaltbánya|basalt|Bazalt|#3b3a38|20
+Homokkőbánya|sandstone|Homokkő|#c99a63|25
+Palabánya|slate|Pala|#4f5660|30
+Lignitbánya|lignite|Lignit|#51402f|35
+Feketekőszén-bánya|hardcoal|Feketekőszén|#202124|40
+Antracitbánya|anthracite|Antracit|#17181a|45
+Rézércbánya|copper|Rézérc|#b76d3b|55
+Vasércbánya|iron|Vasérc|#76645a|65
+Bauxitbánya|bauxite|Bauxit|#9f5139|75
+Mangánércbánya|manganese|Mangánérc|#604b58|85
+Cinkércbánya|zinc|Cinkérc|#a6a9aa|95
+Ólomércbánya|lead|Ólomérc|#4d5054|105
+Nikkelércbánya|nickel|Nikkelérc|#66726a|115
+Krómitbánya|chromite|Krómit|#252a2b|125
+Kassziteritbánya|cassiterite|Kassziterit|#8b7652|135
+Wolframitbánya|wolframite|Wolframit|#292b2d|145
+Molibdenitbánya|molybdenite|Molibdenit|#70757a|155
+Kobaltbánya|cobalt|Kobaltkő|#405f83|165
+Grafitbánya|graphite|Grafit|#303133|175
+Lítiumércbánya|lithium|Lítiumérc|#b9c8ce|185
+Fluoritbánya|fluorite|Fluorit|#765ca3|195
+Baritbánya|barite|Barit|#d8d8d1|205
+Gipszbánya|gypsum|Gipsz|#dedbd1|215
+Kősóbánya|halite|Kősó|#eee8d8|225
+Kénbánya|sulfur|Kén|#c9aa26|235
+Piritbánya|pyrite|Pirit|#b58a25|245
+Ezüstércbánya|silver|Ezüstérc|#bfc2c5|260
+Aranyércbánya|gold|Aranyérc|#d6a52c|280
+Platinaércbánya|platinum|Platinaérc|#c9c8c1|300
+Palládiumércbánya|palladium|Palládiumérc|#a9afb3|320
+Ródiumércbánya|rhodium|Ródiumérc|#8f969b|340
+Irídiumércbánya|iridium|Irídiumérc|#665b73|360
+Ozmiumércbánya|osmium|Ozmiumérc|#383a3c|380
+Rutilbánya|rutile|Rutil|#a95745|400
+Ilmenitbánya|ilmenite|Ilmenit|#35373a|420
+Cirkonbánya|zircon|Cirkon|#4f8ea5|440
+Monacitbánya|monazite|Monacit|#b06b3f|460
+Bastnäsitbánya|bastnasite|Bastnäsit|#b19a42|480
+Smaragdbánya|emerald|Smaragd|#19845a|520
+Rubinbánya|ruby|Rubin|#a62d35|550
+Zafírbánya|sapphire|Zafír|#275e9d|580
+Turmalinbánya|tourmaline|Turmalin|#a24b75|610
+Ametisztbánya|amethyst|Ametiszt|#76519e|640
+Topázbánya|topaz|Topáz|#c58b45|670
+Opálbánya|opal|Opál|#d8d2c4|700
+Gyémántbánya|diamond|Gyémánt|#8fc6d2|750
+Kvarckristály-bánya|quartz|Kvarckristály|#b7cbd0|800
+Obszidiánbánya|obsidian|Obszidián|#17191d|850
+Titánércbánya|titanium|Titánérc|#7d8487|900
+Vanádiumércbánya|vanadium|Vanádiumérc|#4c7080|950
+Tantálércbánya|tantalum|Tantálérc|#85898a|1000
+Nióbiumércbánya|niobium|Nióbiumérc|#5d8392|1050
+Uránércbánya|uranium|Uránérc|#6d9650|1100
+Tóriumércbánya|thorium|Tóriumérc|#547b5d|1150
+Berkéliumbánya|berkelium|Berkélium|#654e83|1200
+Kalifornium-bánya|californium|Kalifornium|#a36b4a|1250
+Tellúrércbánya|tellurium|Tellúrérc|#a18c39|1300
+Germániumércbánya|germanium|Germániumérc|#72777a|1350
+Bizmutércbánya|bismuth|Bizmutérc|#8c7182|1400
+Galliumércbánya|gallium|Galliumérc|#597c91|1450
+Szelénércbánya|selenium|Szelénérc|#8b514b|1500
+Indiumércbánya|indium|Indiumérc|#a4a8aa|1550
+Hafniumércbánya|hafnium|Hafniumérc|#888c8e|1600
+Réniumbánya|rhenium|Réniumérc|#676d70|1650
+Skandiumércbánya|scandium|Skandiumérc|#5e7c89|1700
+Stronciumércbánya|strontium|Stronciumérc|#607b67|1750
+Bórásvány-bánya|boron|Bórásvány|#755e48|1800
+Berilliumércbánya|beryllium|Berilliumérc|#65935f|1900`.split('\n').map(x=>x.split('|'));
 const H70=rows.map((_,i)=>100+i*i*80),fmt70=n=>Number(n||0).toLocaleString('hu-HU');
-function gear(){if(!S)return;const st=S.state,u=S.upgrades||{},a=document.getElementById('picks'),b=document.getElementById('upgrades');if(a&&window.PICKS)a.innerHTML=PICKS.map((x,i)=>`<div class="card row"><div class="ico">${x[1]}</div><main><b>${x[0]}</b><small>${x[2]} alap sebzés • feloldás Lv ${x[4]} • ${fmt70(x[3])} Ft</small></main><button class="btn ${st.selected_pick===i+1?'green':''}" onclick="buyPick(${i+1})">${st.selected_pick===i+1?'FELSZERELVE':i===0?'INGYENES':'MEGVESZEM'}</button></div>`).join('');if(b)b.innerHTML=[['pick','⛏️','Csákányerő',u.pick_upgrade,5000,'+5 sebzés'],['machine','🏭','Bányagép',u.machine_level,8000,'géperő'],['xp','⭐','XP-fejlesztés',u.xp_upgrade,6500,'+3 XP/ütés'],['offline','🕳️','Bányagép-rendszer',u.offline_upgrade,7000,'fejlesztett gépek']].map(x=>{const c=x[4]*(x[3]+1)**2;return `<div class="row"><div class="ico">${x[1]}</div><main><b>${x[2]} • LV ${x[3]}</b><small>${x[5]} • következő: ${fmt70(c)} Ft</small></main><button class="btn" onclick="upgrade('${x[0]}')">FEJLESZTÉS</button></div>`}).join('')}
-function mines(){if(!S)return;const e=document.getElementById('minesList');if(e)e.innerHTML=rows.map((m,i)=>{const ok=Number(S.profile?.level||1)>=i+1,active=Number(S.state?.selected_mine||1)===i+1;return `<div class="card row"><div class="ico">${m[3]}</div><main><b>${i+1}. ${m[0]}</b><small>LV ${i+1} • ${fmt70(H70[i])} HP • ${m[2]}</small></main><button class="btn ${active?'green':''}" ${ok?'':'disabled'} onclick="selectMine(${i+1})">${active?'AKTÍV':ok?'BELÉPÉS':'🔒 LV '+(i+1)}</button></div>`}).join('');const t=document.querySelector('#mines .sub');if(t)t.textContent='70 egyedi lelőhely • minden bánya saját szinthez kötve'}
-function ores(){if(!S)return;const e=document.getElementById('marketSell');if(e)e.innerHTML='<div class="list">'+rows.map(m=>{const q=Number(S.ores?.[m[1]]||0);return `<div class="card row"><div class="ico">${m[3]}</div><main><b>${m[2]}</b><small>${fmt70(q)} db • egységár <span class="price">${fmt70(m[4])} Ft</span></small></main><button class="btn" onclick="sellOre('${m[1]}')">ELADÁS</button></div>`}).join('')+'</div>';const inv=document.getElementById('inventoryList');if(inv)inv.innerHTML=rows.map(m=>{const q=Number(S.ores?.[m[1]]||0);return `<div class="card row"><div class="ico">${m[3]}</div><main><b>${m[2]}</b><small>${fmt70(q)} db • összérték ${fmt70(q*m[4])} Ft</small></main><span class="price">${fmt70(m[4])} Ft</span></div>`}).join('')}
-function all(){if(!S?.profile||!S?.state)return;const p=S.profile,st=S.state,u=S.upgrades||{},o=S.ores||{},mi=Math.max(0,Math.min(69,Number(st.selected_mine||1)-1)),set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};set('userName',p.username);set('userLevel',p.level);set('userXp',fmt70(p.xp));set('money',fmt70(p.money));set('gems',fmt70(st.gems));const lv=Number(p.level||1),aa=(lv-1)*250+(lv-1)**2*80,bb=lv*250+lv**2*80,xb=document.getElementById('xpBar');if(xb)xb.style.width=Math.max(0,Math.min(100,(p.xp-aa)/Math.max(1,bb-aa)*100))+'%';set('mineName',rows[mi][0]+' • '+(mi+1)+'. szint');const pk=(window.PICKS||[])[Math.max(0,(st.selected_pick||1)-1)]||(window.PICKS||[])[0];set('pickInfo',pk?pk[0]+' • '+(pk[2]+(u.pick_upgrade||0)*5+(u.machine_level||0)*2)+' sebzés':'Felszerelés');set('hpText',fmt70(st.rock_hp)+' / '+fmt70(H70[mi])+' HP');const hp=document.getElementById('hpBar');if(hp)hp.style.width=Math.max(0,Math.min(100,Number(st.rock_hp)/H70[mi]*100))+'%';set('rock',rows[mi][3]);set('oreGlow',rows[Math.min(69,mi+1)][3]);set('hits',fmt70(st.hits));set('machine',fmt70(u.machine_level));set('oreTotal',fmt70(Object.values(o).reduce((a,b)=>a+Number(b),0)));const ho=document.getElementById('homeOres');if(ho)ho.innerHTML=rows.slice(0,6).map(m=>`<div class="ore"><div class="ico">${m[3]}</div><b>${fmt70(o[m[1]]||0)}</b><small>${m[2]}</small></div>`).join('');mines();gear();ores();try{renderQuests()}catch(_){}try{renderDaily()}catch(_){}try{renderProfile()}catch(_){}try{renderSocial()}catch(_){}admin()}
+function mineralIcon(row,size=46){const c=row[3];const c2=row[3];return `<svg class="mineral-icon" width="${size}" height="${size}" viewBox="0 0 64 64" aria-label="${row[2]}"><defs><radialGradient id="g${row[1]}" cx="32%" cy="25%"><stop offset="0" stop-color="#ffffff" stop-opacity=".82"/><stop offset=".22" stop-color="${c}"/><stop offset="1" stop-color="#111"/></radialGradient></defs><path d="M8 34 17 13 38 7 56 22 53 45 35 58 13 51Z" fill="url(#g${row[1]})" stroke="#d7d7d7" stroke-opacity=".28" stroke-width="2"/><path d="M17 13 31 28 38 7M31 28 53 45M31 28 13 51" fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2"/><path d="M18 21 28 16" stroke="#fff" stroke-opacity=".48" stroke-width="3" stroke-linecap="round"/></svg>`}
+function gear(){if(!S)return;const st=S.state,u=S.upgrades||{},a=document.getElementById('picks'),b=document.getElementById('upgrades');if(a&&window.PICKS)a.innerHTML=PICKS.map((x,i)=>`<div class="card row"><div class="ico">⛏</div><main><b>${x[0]}</b><small>${x[2]} alap sebzés • feloldás Lv ${x[4]} • ${fmt70(x[3])} Ft</small></main><button class="btn ${st.selected_pick===i+1?'green':''}" onclick="buyPick(${i+1})">${st.selected_pick===i+1?'FELSZERELVE':i===0?'INGYENES':'MEGVESZEM'}</button></div>`).join('');if(b)b.innerHTML=[['pick','Csákányerő',u.pick_upgrade,5000,'+5 sebzés'],['machine','Bányagép',u.machine_level,8000,'géperő'],['xp','XP-fejlesztés',u.xp_upgrade,6500,'+3 XP/ütés'],['offline','Bányagép-rendszer',u.offline_upgrade,7000,'fejlesztett gépek']].map(x=>{const c=x[3]*(x[2]+1)**2;return `<div class="row"><div class="ico">⚙</div><main><b>${x[1]} • LV ${x[2]}</b><small>${x[4]} • következő: ${fmt70(c)} Ft</small></main><button class="btn" onclick="upgrade('${x[0]}')">FEJLESZTÉS</button></div>`}).join('')}
+function mines(){if(!S)return;const e=document.getElementById('minesList');if(e)e.innerHTML=rows.map((m,i)=>{const ok=Number(S.profile?.level||1)>=i+1,active=Number(S.state?.selected_mine||1)===i+1;return `<div class="card row"><div class="ico mineral-slot">${mineralIcon(m,52)}</div><main><b>${i+1}. ${m[0]}</b><small>LV ${i+1} • ${fmt70(H70[i])} HP • ${m[2]}</small></main><button class="btn ${active?'green':''}" ${ok?'':'disabled'} onclick="selectMine(${i+1})">${active?'AKTÍV':ok?'BELÉPÉS':'🔒 LV '+(i+1)}</button></div>`}).join('');const t=document.querySelector('#mines .sub');if(t)t.textContent='70 egyedi lelőhely • minden bánya saját ércével'}
+function ores(){if(!S)return;const e=document.getElementById('marketSell');if(e)e.innerHTML='<div class="list">'+rows.map(m=>{const q=Number(S.ores?.[m[1]]||0);return `<div class="card row"><div class="ico mineral-slot">${mineralIcon(m,52)}</div><main><b>${m[2]}</b><small>${fmt70(q)} db • egységár <span class="price">${fmt70(m[4])} Ft</span></small></main><button class="btn" onclick="sellOre('${m[1]}')">ELADÁS</button></div>`}).join('')+'</div>';const inv=document.getElementById('inventoryList');if(inv)inv.innerHTML=rows.map(m=>{const q=Number(S.ores?.[m[1]]||0);return `<div class="card row"><div class="ico mineral-slot">${mineralIcon(m,52)}</div><main><b>${m[2]}</b><small>${fmt70(q)} db • összérték ${fmt70(q*m[4])} Ft</small></main><span class="price">${fmt70(m[4])} Ft</span></div>`}).join('')}
+function all(){if(!S?.profile||!S?.state)return;const p=S.profile,st=S.state,u=S.upgrades||{},o=S.ores||{},mi=Math.max(0,Math.min(69,Number(st.selected_mine||1)-1)),set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};set('userName',p.username);set('userLevel',p.level);set('userXp',fmt70(p.xp));set('money',fmt70(p.money));set('gems',fmt70(st.gems));const lv=Number(p.level||1),aa=(lv-1)*250+(lv-1)**2*80,bb=lv*250+lv**2*80,xb=document.getElementById('xpBar');if(xb)xb.style.width=Math.max(0,Math.min(100,(p.xp-aa)/Math.max(1,bb-aa)*100))+'%';set('mineName',rows[mi][0]+' • '+(mi+1)+'. szint');const pk=(window.PICKS||[])[Math.max(0,(st.selected_pick||1)-1)]||(window.PICKS||[])[0];set('pickInfo',pk?pk[0]+' • '+(pk[2]+(u.pick_upgrade||0)*5+(u.machine_level||0)*2)+' sebzés':'Felszerelés');set('hpText',fmt70(st.rock_hp)+' / '+fmt70(H70[mi])+' HP');const hp=document.getElementById('hpBar');if(hp)hp.style.width=Math.max(0,Math.min(100,Number(st.rock_hp)/H70[mi]*100))+'%';const rock=document.getElementById('rock');if(rock)rock.innerHTML=mineralIcon(rows[mi],100);const glow=document.getElementById('oreGlow');if(glow)glow.innerHTML=mineralIcon(rows[Math.min(69,mi+1)],64);set('hits',fmt70(st.hits));set('machine',fmt70(u.machine_level));set('oreTotal',fmt70(Object.values(o).reduce((a,b)=>a+Number(b),0)));const ho=document.getElementById('homeOres');if(ho)ho.innerHTML=rows.slice(0,6).map(m=>`<div class="ore"><div class="ico mineral-slot">${mineralIcon(m,48)}</div><b>${fmt70(o[m[1]]||0)}</b><small>${m[2]}</small></div>`).join('');mines();gear();ores();try{renderQuests()}catch(_){}try{renderDaily()}catch(_){}try{renderProfile()}catch(_){}try{renderSocial()}catch(_){}admin()}
 function nav(id){document.querySelectorAll('.screen').forEach(x=>x.classList.toggle('active',x.id===id));document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('on',x.dataset.page===id));window.scrollTo({top:0,behavior:'smooth'});if(id==='mines')mines();if(id==='gear')gear();if(id==='market'||id==='inventory')ores();if(id==='rank'&&window.loadRank)loadRank();if(id==='clans'&&window.loadClans)loadClans();if(id==='payout'&&window.loadPayouts)loadPayouts();if(id==='support'&&window.loadTickets)loadTickets();if(id==='news'&&window.loadNews)loadNews();if(id==='admin'&&window.loadAdmin)loadAdmin()}
 function admin(){const b=document.getElementById('adminMenu');if(b&&S?.is_admin)b.classList.remove('hidden');const ex=document.querySelector('#extras .menu-grid');if(ex&&S?.is_admin&&!document.getElementById('adminMenuQuick')){const x=document.createElement('button');x.id='adminMenuQuick';x.className='card menu';x.innerHTML='<strong>👑 Admin központ</strong><span>Játékosok, XP, tiltás, beállítások</span>';x.onclick=()=>nav('admin');ex.appendChild(x)}}
 window.renderAll=all;window.renderMines=mines;window.renderGear=gear;window.show=nav;const timer=setInterval(()=>{if(S&&document.getElementById('app')){all();clearInterval(timer)}},250);setTimeout(()=>{all()},1500);
