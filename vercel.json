@@ -1,1 +1,1 @@
-{"rewrites":[{"source":"/","destination":"/icons.html"},{"source":"/game","destination":"/icons.html"},{"source":"/game/","destination":"/icons.html"}]}
+{"rewrites":[{"source":"/","destination":"/api/index"},{"source":"/game","destination":"/api/index"},{"source":"/game/","destination":"/api/index"}]}
